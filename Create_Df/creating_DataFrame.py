@@ -51,6 +51,11 @@ for duplicate_column in duplicate_columns:
 merged_df = df1.merge(df2, on='eid', how='outer')
 merged_df = merged_df.merge(df3, on='eid', how='outer')
 
+# Move the column '131306-0.0' to the last position and call it 'target'
+target_column = '131306-0.0'
+merged_df = merged_df[[col for col in merged_df.columns if col != target_column] + [target_column]]  # Move the target column to the last position
+
+
 script_dir = os.path.dirname(os.path.abspath('__file__'))
 
 output_file_path = os.path.join(script_dir, 'merged.csv')

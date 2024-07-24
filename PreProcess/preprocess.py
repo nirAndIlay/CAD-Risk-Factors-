@@ -1,13 +1,18 @@
 import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
+# After Handle with null values
+
+df_path='/home/binjaminni@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
 
 # Load the dataset
-df = pd.read_csv('merged.csv')
+df = pd.read_csv(df_path)
 
 # 1. Calculate age from year of birth and date of attending assessment centre
 df['Date of attending assessment centre'] = pd.to_datetime(df['53-0.0'])
 df['Year of birth'] = df['34-0.0']
 df['Age'] = df['Date of attending assessment centre'].dt.year - df['Year of birth']
+# drop the columns 'Date of attending assessment centre' and 'Year of birth' after calculating age
+df.drop(columns=['Date of attending assessment centre', 'Year of birth'], inplace=True)
 
 # 3. Delete samples with specific values in Ethnicity
 df = df[~df['21000-0.0'].isin([-3, -1, 6])]
@@ -50,6 +55,21 @@ for field in fields_to_change:
 fields_to_delete = ['1329-0.0', '1369-0.0', '1548-0.0']
 for field in fields_to_delete:
     df = df[~df[field].isin([-1, -3])]
+
+# 15.Arrange the value 131306-0.0 as our target value as a binary value (0,1)
+# Define the special dates
+special_dates = ['1900-01-01', '1909-09-09', '2037-07-07','0.0']
+# Define a function that checks if a date is in the special group
+def convert_date_to_binary(date):
+    if date in special_dates:
+        return 0
+    else:
+        return 1
+
+# Apply the function to the target column
+df['131306-0.0'] = df['131306-0.0'].apply(convert_date_to_binary)
+
+
 
 # Save the processed DataFrame to a new CSV file
 df.to_csv('processed_data.csv', index=False)
