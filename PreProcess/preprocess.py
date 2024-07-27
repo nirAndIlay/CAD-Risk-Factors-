@@ -12,7 +12,7 @@ df['Date of attending assessment centre'] = pd.to_datetime(df['53-0.0'])
 df['Year of birth'] = df['34-0.0']
 df['Age'] = df['Date of attending assessment centre'].dt.year - df['Year of birth']
 # drop the columns 'Date of attending assessment centre' and 'Year of birth' after calculating age
-df.drop(columns=['Date of attending assessment centre', 'Year of birth'], inplace=True)
+df.drop(columns=['Date of attending assessment centre', 'Year of birth','53-0.0', '34-0.0' ], inplace=True)
 
 # 3. Delete samples with specific values in Ethnicity
 df = df[~df['21000-0.0'].isin([-3, -1, 6])]
