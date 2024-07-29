@@ -11,8 +11,7 @@ df = pd.read_csv(df_path)
 df['Date of attending assessment centre'] = pd.to_datetime(df['53-0.0'])
 df['Year of birth'] = df['34-0.0']
 df['Age'] = df['Date of attending assessment centre'].dt.year - df['Year of birth']
-# drop the columns 'Date of attending assessment centre' and 'Year of birth' after calculating age
-df.drop(columns=['Date of attending assessment centre', 'Year of birth','53-0.0', '34-0.0' ], inplace=True)
+
 
 # 3. Delete samples with specific values in Ethnicity
 df = df[~df['21000-0.0'].isin([-3, -1, 6])]
@@ -58,7 +57,7 @@ for field in fields_to_delete:
 
 # 15.Arrange the value 131306-0.0 as our target value as a binary value (0,1)
 # Define the special dates
-special_dates = ['1900-01-01', '1909-09-09', '2037-07-07','0.0']
+special_dates = ['1900-01-01', '1909-09-09', '2037-07-07']
 # Define a function that checks if a date is in the special group
 def convert_date_to_binary(date):
     if date in special_dates:
@@ -67,7 +66,15 @@ def convert_date_to_binary(date):
         return 1
 
 # Apply the function to the target column
-df['131306-0.0'] = df['131306-0.0'].apply(convert_date_to_binary)
+df['tag'] = df['131306-0.0']
+df['tag']=df['tag'].apply(convert_date_to_binary)
+
+# Filter the columns by columns [13106-0.0] < [53-0.0] date and tag == 1
+df['131306-0.0'] = pd.to_datetime(df['131306-0.0'])
+df = df[((df['131306-0.0'] < df['Date of attending assessment centre']) & (df['tag'] == 1)) | (df['tag'] == 0)]
+
+# drop the columns 'Date of attending assessment centre' and 'Year of birth' after calculating age
+df.drop(columns=['Date of attending assessment centre', 'Year of birth','53-0.0', '34-0.0','131306-0.0'], inplace=True)
 
 
 
