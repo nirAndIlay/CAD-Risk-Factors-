@@ -76,6 +76,14 @@ df = df[((df['131306-0.0'] < df['Date of attending assessment centre']) & (df['t
 # drop the columns 'Date of attending assessment centre' and 'Year of birth' after calculating age
 df.drop(columns=['Date of attending assessment centre', 'Year of birth','53-0.0', '34-0.0','131306-0.0'], inplace=True)
 
+# 16. Choose randomly 300,000 samples from the dataset with tag==0, and keep all samples with tag==1
+df_tag_0 = df[df['tag'] == 0].sample(n=300000, random_state=42)
+df_tag_1 = df[df['tag'] == 1]
+
+# Merge the two DataFrames in random order to shuffle the data
+df = pd.concat([df_tag_0, df_tag_1])
+df = df.sample(frac=1, random_state=42).reset_index(drop=True)
+
 
 
 # Save the processed DataFrame to a new CSV file
