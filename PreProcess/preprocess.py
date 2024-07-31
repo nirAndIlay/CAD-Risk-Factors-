@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 # After Handle with null values
 
-df_path='/home/binjaminni@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
+df_path='/home/ilayed@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
 
 # Load the dataset
 df = pd.read_csv(df_path)
@@ -15,6 +15,9 @@ df['Age'] = df['Date of attending assessment centre'].dt.year - df['Year of birt
 
 # 3. Delete samples with specific values in Ethnicity
 df = df[~df['21000-0.0'].isin([-3, -1, 6])]
+# 3.1 Only relating to the main categoris of Enthnicity, without the sub-categories 
+df['21000-0.0'] = df['21000-0.0'].astype(str).str[0]
+df['21000-0.0'] = df['21000-0.0'].astype(int)
 
 # 4. Delete samples with specific values in smoking status
 df = df[~df['20116-0.0'].isin([-1, -3])]
@@ -38,12 +41,12 @@ df = df[~df['1160-0.0'].isin([-3, -1])]
 # 10. Delete samples with specific values in handedness
 df = df[~df['1707-0.0'].isin([-3])]
 
-# 11. Handle usual walking pace
-df = df[~df['924-0.0'].isin([-3])]
-df['924-0.0'] = df['924-0.0'].replace({-7: -2})
+# 11. Handle usual walking pace, deleting samples with ('None of the above', and 'Prefer not to answer)
+df = df[~df['924-0.0'].isin([-3, -7])]
+
 
 # 12. Convert types of physical activity in last 4 weeks to binary
-df['6164-0.0'] = df['6164-0.0'].apply(lambda x: 1 if x in [-3, -4, 1, 7] else 0 if x in [2, 3, 5] else x)
+df['6164-0.0'] = df['6164-0.0'].apply(lambda x: 1 if x in [-3, 4, 1, -7] else 0 if x in [2, 3, 5] else x)
 
 # 13. Change values for field IDs 1289, 1498, 1528
 fields_to_change = ['1289-0.0', '1498-0.0', '1528-0.0']
@@ -55,6 +58,7 @@ fields_to_delete = ['1329-0.0', '1369-0.0', '1548-0.0']
 for field in fields_to_delete:
     df = df[~df[field].isin([-1, -3])]
 
+
 # 15.Arrange the value 131306-0.0 as our target value as a binary value (0,1)
 # Define the special dates
 special_dates = ['1900-01-01', '1909-09-09', '2037-07-07']
@@ -64,6 +68,8 @@ def convert_date_to_binary(date):
         return 0
     else:
         return 1
+
+
 
 # Apply the function to the target column
 df['tag'] = df['131306-0.0']
@@ -84,9 +90,30 @@ df_tag_1 = df[df['tag'] == 1]
 df = pd.concat([df_tag_0, df_tag_1])
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
-
+# One-Hot-Encoding for categorial veraibles 
+one_hot_encoded = pd.get_dummies(df, columns=[
+    '21000-0.0', 
+    '20116-0.0', 
+    '1558-0.0',  
+    '1707-0.0',
+    '924-0.0',
+    '6164-0.0',
+    '1329-0.0',
+    '1369-0.0',
+    '1548-0.0',
+], prefix=[
+    'Ethnicity', 
+    'Smoking', 
+    'Alcohol', 
+    'Handedness',
+    'Usual Walking Pace',
+    'Types of physical activity in last 4 weeks',
+    'Oily fish intake',
+    'Beef intake',
+    'Variation in diet'
+])
 
 # Save the processed DataFrame to a new CSV file
-df.to_csv('processed_data.csv', index=False)
+one_hot_encoded.to_csv('processed_data.csv', index=False)
 
 print("Preprocessing complete. Processed data saved to 'processed_data.csv'.")
