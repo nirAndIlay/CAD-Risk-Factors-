@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 # After Handle with null values
 
-df_path='/home/ilayed@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
+df_path='/home/binjaminni@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
 
 # Load the dataset
 df = pd.read_csv(df_path)
@@ -90,30 +90,41 @@ df_tag_1 = df[df['tag'] == 1]
 df = pd.concat([df_tag_0, df_tag_1])
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
-# One-Hot-Encoding for categorial veraibles 
-one_hot_encoded = pd.get_dummies(df, columns=[
-    '21000-0.0', 
-    '20116-0.0', 
-    '1558-0.0',  
-    '1707-0.0',
-    '924-0.0',
-    '6164-0.0',
-    '1329-0.0',
-    '1369-0.0',
-    '1548-0.0',
-], prefix=[
-    'Ethnicity', 
-    'Smoking', 
-    'Alcohol', 
-    'Handedness',
-    'Usual Walking Pace',
-    'Types of physical activity in last 4 weeks',
-    'Oily fish intake',
-    'Beef intake',
-    'Variation in diet'
-])
 
+###
+# One-Hot-Encoding for categorial veraibles
+##one_hot_encoded = pd.get_dummies(df, columns=[
+##    '21000-0.0',
+##    '20116-0.0',
+##    '1558-0.0',
+##    '1707-0.0',
+##    '924-0.0',
+##    '6164-0.0',
+##    '1329-0.0',
+##    '1369-0.0',
+##    '1548-0.0',
+##], prefix=[
+##    'Ethnicity',
+##    'Smoking',
+##    'Alcohol',
+##    'Handedness',
+##    'Usual Walking Pace',
+##    'Types of physical activity in last 4 weeks',
+##    'Oily fish intake',
+##    'Beef intake',
+##    'Variation in diet'
+##])
+###
 # Save the processed DataFrame to a new CSV file
-one_hot_encoded.to_csv('processed_data.csv', index=False)
+#one_hot_encoded.to_csv('processed_data.csv', index=False)
+
+# Normalize all df columns except the target and eid columns
+scaler = MinMaxScaler()
+columns_to_normalize = df.columns.difference(['eid','tag'])
+df[columns_to_normalize] = scaler.fit_transform(df[columns_to_normalize])
+
+df.to_csv('processed_data.csv', index=False)
+
+
 
 print("Preprocessing complete. Processed data saved to 'processed_data.csv'.")
