@@ -118,9 +118,9 @@ df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 # Save the processed DataFrame to a new CSV file
 #one_hot_encoded.to_csv('processed_data.csv', index=False)
 
-# Normalize all df columns except the target and eid columns
+# Normalize all df columns except the target and eid and the categorical columns
 scaler = MinMaxScaler()
-columns_to_normalize = df.columns.difference(['eid','tag'])
+columns_to_normalize = df.columns.difference(['eid','tag','21000-0.0','20116-0.0','1558-0.0','1707-0.0','924-0.0','6164-0.0','1329-0.0','1369-0.0','1548-0.0'])
 df[columns_to_normalize] = scaler.fit_transform(df[columns_to_normalize])
 
 df.to_csv('processed_data.csv', index=False)
