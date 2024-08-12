@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 # After Handle with null values
 
-df_path='/home/binjaminni@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
+df_path='/home/ilayed@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
 
 # Load the dataset
 df = pd.read_csv(df_path)
@@ -91,40 +91,48 @@ df = pd.concat([df_tag_0, df_tag_1])
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 
-###
-# One-Hot-Encoding for categorial veraibles
-##one_hot_encoded = pd.get_dummies(df, columns=[
-##    '21000-0.0',
-##    '20116-0.0',
-##    '1558-0.0',
-##    '1707-0.0',
-##    '924-0.0',
-##    '6164-0.0',
-##    '1329-0.0',
-##    '1369-0.0',
-##    '1548-0.0',
-##], prefix=[
-##    'Ethnicity',
-##    'Smoking',
-##    'Alcohol',
-##    'Handedness',
-##    'Usual Walking Pace',
-##    'Types of physical activity in last 4 weeks',
-##    'Oily fish intake',
-##    'Beef intake',
-##    'Variation in diet'
-##])
-###
-# Save the processed DataFrame to a new CSV file
-#one_hot_encoded.to_csv('processed_data.csv', index=False)
-
 # Normalize all df columns except the target and eid and the categorical columns
 scaler = MinMaxScaler()
 columns_to_normalize = df.columns.difference(['eid','tag','21000-0.0','20116-0.0','1558-0.0','1707-0.0','924-0.0','6164-0.0','1329-0.0','1369-0.0','1548-0.0'])
 df[columns_to_normalize] = scaler.fit_transform(df[columns_to_normalize])
 
-df.to_csv('processed_data.csv', index=False)
 
+#One-Hot-Encoding for categorial veraibles
+one_hot_encoded = pd.get_dummies(df, columns=[
+    '21000-0.0',
+    '20116-0.0',
+    '1558-0.0',
+    '1707-0.0',
+    '924-0.0',
+    '6164-0.0',
+    '1329-0.0',
+    '1369-0.0',
+    '1548-0.0',
+], prefix=[
+    'Ethnicity',
+    'Smoking',
+    'Alcohol',
+    'Handedness',
+    'Usual Walking Pace',
+    'Types of physical activity in last 4 weeks',
+    'Oily fish intake',
+    'Beef intake',
+    'Variation in diet'
+])
 
+cols_to_convert = ['Ethnicity_1','Ethnicity_2','Ethnicity_3','Ethnicity_4','Ethnicity_5',
+'Smoking_0.0','Smoking_1.0','Smoking_2.0',
+'Alcohol_1.0','Alcohol_2.0','Alcohol_3.0','Alcohol_4.0','Alcohol_5.0','Alcohol_6.0',
+'Handedness_1.0','Handedness_2.0','Handedness_3.0',
+'Usual Walking Pace_1.0','Usual Walking Pace_2.0','Usual Walking Pace_3.0',
+'Types of physical activity in last 4 weeks_0','Types of physical activity in last 4 weeks_1',
+'Oily fish intake_0.0','Oily fish intake_1.0','Oily fish intake_2.0','Oily fish intake_3.0','Oily fish intake_4.0','Oily fish intake_5.0',
+'Beef intake_0.0','Beef intake_1.0','Beef intake_2.0','Beef intake_3.0','Beef intake_4.0','Beef intake_5.0',
+'Variation in diet_1.0','Variation in diet_2.0','Variation in diet_3.0']
+
+one_hot_encoded[cols_to_convert] = one_hot_encoded[cols_to_convert].astype(int)
+
+# Save the processed DataFrame to a new CSV file
+one_hot_encoded.to_csv('processed_data.csv', index=False)
 
 print("Preprocessing complete. Processed data saved to 'processed_data.csv'.")
