@@ -1,0 +1,298 @@
+Parameters: penalty:l1, C:0.1, Max Iterations500, threshold:0.1
+recall: 0.7030481809242871
+Accuracy: 0.9001109877913429
+[[54625  5394]
+ [  906  2145]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations500, threshold:0.3
+recall: 0.3828253031792855
+Accuracy: 0.9503726018709371
+[[58772  1247]
+ [ 1883  1168]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations500, threshold:0.5
+recall: 0.20058997050147492
+Accuracy: 0.9547645473283654
+[[59605   414]
+ [ 2439   612]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations500, threshold:0.7
+recall: 0.07669616519174041
+Accuracy: 0.9535119708260663
+[[59904   115]
+ [ 2817   234]]
+
+_______________________________________________________
+Parameters: penalty:l1, C:0.1, Max Iterations1000, threshold:0.1
+recall: 0.7030481809242871
+Accuracy: 0.9001109877913429
+[[54625  5394]
+ [  906  2145]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations1000, threshold:0.3
+recall: 0.3828253031792855
+Accuracy: 0.9503726018709371
+[[58772  1247]
+ [ 1883  1168]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations1000, threshold:0.5
+recall: 0.20058997050147492
+Accuracy: 0.9547645473283654
+[[59605   414]
+ [ 2439   612]]
+
+Parameters: penalty:l1, C:0.1, Max Iterations1000, threshold:0.7
+recall: 0.07669616519174041
+Accuracy: 0.9535119708260663
+[[59904   115]
+ [ 2817   234]]
+
+_______________________________________________________
+Parameters: penalty:l1, C:1, Max Iterations500, threshold:0.1
+recall: 0.7053425106522452
+Accuracy: 0.9009354685270334
+[[54670  5349]
+ [  899  2152]]
+
+Parameters: penalty:l1, C:1, Max Iterations500, threshold:0.3
+recall: 0.39364142903965915
+Accuracy: 0.9501030600919613
+[[58722  1297]
+ [ 1850  1201]]
+
+Parameters: penalty:l1, C:1, Max Iterations500, threshold:0.5
+recall: 0.21730580137659783
+Accuracy: 0.9549389567147614
+[[59565   454]
+ [ 2388   663]]
+
+Parameters: penalty:l1, C:1, Max Iterations500, threshold:0.7
+recall: 0.08915109800065553
+Accuracy: 0.953892500396385
+[[59890   129]
+ [ 2779   272]]
+
+_______________________________________________________
+Parameters: penalty:l1, C:1, Max Iterations1000, threshold:0.1
+recall: 0.7053425106522452
+Accuracy: 0.9009354685270334
+[[54670  5349]
+ [  899  2152]]
+
+Parameters: penalty:l1, C:1, Max Iterations1000, threshold:0.3
+recall: 0.39364142903965915
+Accuracy: 0.9501030600919613
+[[58722  1297]
+ [ 1850  1201]]
+
+Parameters: penalty:l1, C:1, Max Iterations1000, threshold:0.5
+recall: 0.21730580137659783
+Accuracy: 0.9549389567147614
+[[59565   454]
+ [ 2388   663]]
+
+Parameters: penalty:l1, C:1, Max Iterations1000, threshold:0.7
+recall: 0.08915109800065553
+Accuracy: 0.953892500396385
+[[59890   129]
+ [ 2779   272]]
+
+_______________________________________________________
+Parameters: penalty:l1, C:10, Max Iterations500, threshold:0.1
+recall: 0.7056702720419534
+Accuracy: 0.9006025051530046
+[[54648  5371]
+ [  898  2153]]
+
+Parameters: penalty:l1, C:10, Max Iterations500, threshold:0.3
+recall: 0.3939691904293674
+Accuracy: 0.9500713492944347
+[[58719  1300]
+ [ 1849  1202]]
+
+Parameters: penalty:l1, C:10, Max Iterations500, threshold:0.5
+recall: 0.21992789249426417
+Accuracy: 0.9550816553036309
+[[59566   453]
+ [ 2380   671]]
+
+Parameters: penalty:l1, C:10, Max Iterations500, threshold:0.7
+recall: 0.09046214355948869
+Accuracy: 0.9539400665926748
+[[59889   130]
+ [ 2775   276]]
+
+_______________________________________________________
+Parameters: penalty:l1, C:10, Max Iterations1000, threshold:0.1
+recall: 0.7056702720419534
+Accuracy: 0.9006025051530046
+[[54648  5371]
+ [  898  2153]]
+
+Parameters: penalty:l1, C:10, Max Iterations1000, threshold:0.3
+recall: 0.3939691904293674
+Accuracy: 0.9500713492944347
+[[58719  1300]
+ [ 1849  1202]]
+
+Parameters: penalty:l1, C:10, Max Iterations1000, threshold:0.5
+recall: 0.21992789249426417
+Accuracy: 0.9550816553036309
+[[59566   453]
+ [ 2380   671]]
+
+Parameters: penalty:l1, C:10, Max Iterations1000, threshold:0.7
+recall: 0.09046214355948869
+Accuracy: 0.9539400665926748
+[[59889   130]
+ [ 2775   276]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:0.1, Max Iterations500, threshold:0.1
+recall: 0.6981317600786627
+Accuracy: 0.897891231964484
+[[54500  5519]
+ [  921  2130]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations500, threshold:0.3
+recall: 0.3641429039659128
+Accuracy: 0.9506104328523862
+[[58844  1175]
+ [ 1940  1111]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations500, threshold:0.5
+recall: 0.18092428711897737
+Accuracy: 0.9550023783098145
+[[59680   339]
+ [ 2499   552]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations500, threshold:0.7
+recall: 0.05965257292690921
+Accuracy: 0.953099730458221
+[[59930    89]
+ [ 2869   182]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:0.1, Max Iterations1000, threshold:0.1
+recall: 0.6981317600786627
+Accuracy: 0.897891231964484
+[[54500  5519]
+ [  921  2130]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations1000, threshold:0.3
+recall: 0.3641429039659128
+Accuracy: 0.9506104328523862
+[[58844  1175]
+ [ 1940  1111]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations1000, threshold:0.5
+recall: 0.18092428711897737
+Accuracy: 0.9550023783098145
+[[59680   339]
+ [ 2499   552]]
+
+Parameters: penalty:l2, C:0.1, Max Iterations1000, threshold:0.7
+recall: 0.05965257292690921
+Accuracy: 0.953099730458221
+[[59930    89]
+ [ 2869   182]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:1, Max Iterations500, threshold:0.1
+recall: 0.7017371353654539
+Accuracy: 0.8999365784049469
+[[54618  5401]
+ [  910  2141]]
+
+Parameters: penalty:l2, C:1, Max Iterations500, threshold:0.3
+recall: 0.38806948541461816
+Accuracy: 0.9500396384969082
+[[58735  1284]
+ [ 1867  1184]]
+
+Parameters: penalty:l2, C:1, Max Iterations500, threshold:0.5
+recall: 0.21140609636184857
+Accuracy: 0.9550023783098145
+[[59587   432]
+ [ 2406   645]]
+
+Parameters: penalty:l2, C:1, Max Iterations500, threshold:0.7
+recall: 0.08390691576532285
+Accuracy: 0.9538132234025686
+[[59901   118]
+ [ 2795   256]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:1, Max Iterations1000, threshold:0.1
+recall: 0.7017371353654539
+Accuracy: 0.8999365784049469
+[[54618  5401]
+ [  910  2141]]
+
+Parameters: penalty:l2, C:1, Max Iterations1000, threshold:0.3
+recall: 0.38806948541461816
+Accuracy: 0.9500396384969082
+[[58735  1284]
+ [ 1867  1184]]
+
+Parameters: penalty:l2, C:1, Max Iterations1000, threshold:0.5
+recall: 0.21140609636184857
+Accuracy: 0.9550023783098145
+[[59587   432]
+ [ 2406   645]]
+
+Parameters: penalty:l2, C:1, Max Iterations1000, threshold:0.7
+recall: 0.08390691576532285
+Accuracy: 0.9538132234025686
+[[59901   118]
+ [ 2795   256]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:10, Max Iterations500, threshold:0.1
+recall: 0.7053425106522452
+Accuracy: 0.9006183605517679
+[[54650  5369]
+ [  899  2152]]
+
+Parameters: penalty:l2, C:10, Max Iterations500, threshold:0.3
+recall: 0.3942969518190757
+Accuracy: 0.9501030600919613
+[[58720  1299]
+ [ 1848  1203]]
+
+Parameters: penalty:l2, C:10, Max Iterations500, threshold:0.5
+recall: 0.2192723697148476
+Accuracy: 0.9550657999048676
+[[59567   452]
+ [ 2382   669]]
+
+Parameters: penalty:l2, C:10, Max Iterations500, threshold:0.7
+recall: 0.08980662078007211
+Accuracy: 0.9539083557951482
+[[59889   130]
+ [ 2777   274]]
+
+_______________________________________________________
+Parameters: penalty:l2, C:10, Max Iterations1000, threshold:0.1
+recall: 0.7053425106522452
+Accuracy: 0.9006183605517679
+[[54650  5369]
+ [  899  2152]]
+
+Parameters: penalty:l2, C:10, Max Iterations1000, threshold:0.3
+recall: 0.3942969518190757
+Accuracy: 0.9501030600919613
+[[58720  1299]
+ [ 1848  1203]]
+
+Parameters: penalty:l2, C:10, Max Iterations1000, threshold:0.5
+recall: 0.2192723697148476
+Accuracy: 0.9550657999048676
+[[59567   452]
+ [ 2382   669]]
+
+Parameters: penalty:l2, C:10, Max Iterations1000, threshold:0.7
+recall: 0.08980662078007211
+Accuracy: 0.9539083557951482
+[[59889   130]
+ [ 2777   274]]
