@@ -5,6 +5,8 @@ from sklearn.metrics import classification_report, confusion_matrix, accuracy_sc
 import numpy as np
 import matplotlib.pyplot as plt
 import pickle
+from dict import Names
+
 
 # Load the preprocessed dataset
 df = pd.read_csv('/home/binjaminni@mta.ac.il/thinclient_drives/PreProcess/processed_data.csv')
@@ -63,7 +65,9 @@ for pen in penalties:
             plt.ylabel('True Positive Rate')
             plt.title('Receiver Operating Characteristic')
             plt.legend(loc="lower right")
-            plt.show()
+            plt.savefig('Receiver Operating Characteristic.png')  # Save the figure to a file
+
+
 
             # Find the optimal threshold
             optimal_idx = np.argmin(np.sqrt((1-tpr)**2 + fpr**2))
@@ -114,3 +118,48 @@ with open('best_params.txt', 'w') as f:
     f.write(f"Best Model Threshold: {best_th}\n")
     f.write(f"Best Model F1 Score: {best_f1}\n")
     f.write(f"Best Model Recall Score: {best_recall}\n")
+
+# Save a pole chart of the confusion matrix
+plt.figure()
+plt.imshow(best_conf_mat, interpolation='nearest', cmap=plt.cm.Blues)
+plt.title("Confusion Matrix")
+plt.colorbar()
+plt.xticks([0, 1], ['Predicted 0', 'Predicted 1'])
+plt.yticks([0, 1], ['Actual 0', 'Actual 1'])
+plt.savefig('confusion_matrix.png')  # Save the figure to a file
+
+
+#
+
+# Show the model by the most important features
+# Get the feature importances
+importances = best_model.coef_[0]
+indices = np.argsort(importances)[::-1]
+# Show the list of the full feature names and their importances (sorted by importance)
+print("Feature importances:")
+for i in indices:
+    if str(X.columns[i]) in Names.keys():
+        print(f"{Names[str(X.columns[i])]}: {importances[i]}")
+    else:
+        print(f"{X.columns[i]}: {importances[i]}")
+    print()
+
+# save the Plot of the top 10 feature by importances
+plt.figure()
+plt.title("Top 10 most influential Feature in the model")
+plt.bar(range(10), importances[indices[:10]])
+plt.xticks(range(10), [Names[str(X.columns[i])] if str(X.columns[i]) in Names.keys() else X.columns[i] for i in indices[:10]], rotation=90)
+plt.tight_layout()
+plt.savefig('Top_10_feature_importances.png')  # Save the figure to a file
+print("Top 10 Feature importances saved to Top_10_feature_importances.png .")
+
+# save the Plot of the less  top 10 feature by importances
+plt.figure()
+plt.title("Top 10 less influential Feature in the model")
+plt.bar(range(10), importances[indices[-10:]])
+plt.xticks(range(10), [Names[str(X.columns[i])] if str(X.columns[i]) in Names else X.columns[i] for i in indices[-10:]], rotation=90)
+plt.tight_layout()
+plt.savefig('Top_10_less_feature_importances.png')  # Save the figure to a file
+print("Top 10 less Feature importances saved to Top_10_less_feature_importances.png .")
+print("________End of the experiments________")
+
