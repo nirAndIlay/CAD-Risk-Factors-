@@ -34,6 +34,7 @@ best_avg_score = 0
 best_conf_mat = None
 best_params = None
 best_th = None
+best_accuracy=0
 
 
 
@@ -78,7 +79,7 @@ for pen in penalties:
             recall = recall_score(y_test,y_pred)
             accuracy = accuracy_score(y_test,y_pred)
             f1=f1_score(y_test,y_pred)
-            avg_score = (recall + f1) / 2
+            avg_score = (recall + f1 + accuracy) / 3
             mat = confusion_matrix(y_test,y_pred)
 
             # Check if the current model's average score is better than the best one found so far
@@ -88,6 +89,7 @@ for pen in penalties:
                 best_avg_score = avg_score
                 best_recall = recall
                 best_f1 = f1
+                best_accuracy=accuracy
                 best_conf_mat = mat
                 best_params = (pen, C, max_iter)
                 best_th = optimal_threshold
@@ -104,6 +106,7 @@ for pen in penalties:
 print("Best Model Parameters: ", best_params)
 print(f"Best Model F1 Score: {best_f1}")
 print(f"Best Model Recall Score: {best_recall}")
+print(f"Best Model Accuracy: {best_accuracy}")
 print("Best Model Average Score: ", best_avg_score)
 print("Best Model Confusion Matrix: ", best_conf_mat)
 print("Best Model Threshold: ", best_th)
@@ -118,6 +121,7 @@ with open('best_params.txt', 'w') as f:
     f.write(f"Best Model Threshold: {best_th}\n")
     f.write(f"Best Model F1 Score: {best_f1}\n")
     f.write(f"Best Model Recall Score: {best_recall}\n")
+    f.write(f"Best Model Accuracy: {best_accuracy}\n")
 
 # Save a pole chart of the confusion matrix
 plt.figure()

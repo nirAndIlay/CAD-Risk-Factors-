@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 # After Handle with null values
 
-df_path='/home/ilayed@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
+df_path='/home/binjaminni@mta.ac.il/thinclient_drives/Handle_Nulls/Handle_Null_data.csv'
 
 # Load the dataset
 df = pd.read_csv(df_path)
@@ -13,27 +13,30 @@ df['Year of birth'] = df['34-0.0']
 df['Age'] = df['Date of attending assessment centre'].dt.year - df['Year of birth']
 
 
-# 3. Delete samples with specific values in Ethnicity
+# 2. Delete samples with specific values in Ethnicity
 df = df[~df['21000-0.0'].isin([-3, -1, 6])]
-# 3.1 Only relating to the main categoris of Enthnicity, without the sub-categories 
+# 2.1 Only relating to the main categoris of Enthnicity, without the sub-categories
 df['21000-0.0'] = df['21000-0.0'].astype(str).str[0]
 df['21000-0.0'] = df['21000-0.0'].astype(int)
 
-# 4. Delete samples with specific values in smoking status
+# 3. Delete samples with specific values in smoking status
 df = df[~df['20116-0.0'].isin([-1, -3])]
 
-# 5. Delete samples with specific values in alcohol consumption frequency
-df = df[~df['1558-0.0'].isin([-3])]
+# 4. Delete samples with specific values in alcohol consumption frequency
+df = df[~df['1558-0.0'].isin([-1,-3])]
 
-# 6. Change values in physical activity
+# 5. Change values in physical activity
 df['884-0.0'] = df['884-0.0'].replace({-1: 0, 3: 0})
 
-# 7. Delete samples with specific values in diabetes diagnosis
+# 6 Change values in Father history of cardiovascular diseases to binary values (1=1 other=0) -----
+df['20107-0.0'] = df['20107-0.0'].replace({14: 0, 13:0 ,12:0 ,11:0 ,10:0 ,9:0, 8:0,7:0,6:0,5:0,4:0,3:0,2:1,1:1,-11:0, -13:0, -17:0, -21:0, -23:0, -27:0})
+
+# 7 Change values in Mother history of cardiovascular diseases to binary values (1=1 other=0) -----
+df['20110-0.0'] = df['20110-0.0'].replace({14: 0, 13:0 ,12:0 ,11:0 ,10:0 ,9:0, 8:0,7:0,6:0,5:0,4:0,3:0,2:1,1:1,-11:0, -13:0, -17:0, -21:0, -23:0, -27:0})
+
+# 8. Delete samples with specific values in diabetes diagnosis
 df = df[~df['2443-0.0'].isin([-3, -1])]
 
-# 8. Normalize specific fields
-scaler = MinMaxScaler()
-df[['30010-0.0', '30120-0.0', '30020-0.0']] = scaler.fit_transform(df[['30010-0.0', '30120-0.0', '30020-0.0']])
 
 # 9. Delete samples with specific values in sleep duration
 df = df[~df['1160-0.0'].isin([-3, -1])]
@@ -45,8 +48,8 @@ df = df[~df['1707-0.0'].isin([-3])]
 df = df[~df['924-0.0'].isin([-3, -7])]
 
 
-# 12. Convert types of physical activity in last 4 weeks to binary
-df['6164-0.0'] = df['6164-0.0'].apply(lambda x: 1 if x in [-3, 4, 1, -7] else 0 if x in [2, 3, 5] else x)
+# 12. Convert types of physical activity in last 4 weeks to binary if x in [-3,-4,1,7] so x=0 else if in [2,3,5,6] so x=1
+df['6164-0.0'] = df['6164-0.0'].replace({-3: 0, -4: 0, 1: 0, 7: 0, 2: 1, 3: 1, 5: 1, 6: 1})
 
 # 13. Change values for field IDs 1289, 1498, 1528
 fields_to_change = ['1289-0.0', '1498-0.0', '1528-0.0']
@@ -59,7 +62,25 @@ for field in fields_to_delete:
     df = df[~df[field].isin([-1, -3])]
 
 
-# 15.Arrange the value 131306-0.0 as our target value as a binary value (0,1)
+# 15 Change values in Bread intake
+df['1438-0.0'] = df[field].replace({-3: 1})
+
+# 16 Change values in Fresh fruit intake
+df['1309-0.0'] = df[field].replace({-10: 0, -3: 2.29267, 1: 2.29267})
+
+# 17 Change values in Salt added to food
+df['1478-0.0'] = df[field].replace({-10: 0, -3: 1, 1: 0.5})
+
+# 18 change Cheese intake to binary
+df['1408-0.0'] = df[field].replace({-10: 0, -3: 0, -1: 0, 2: 0, 1:0, 3:1,4:1,5:1})
+
+# 19 change Tea intake to binary
+df['1488-0.0'] = df[field].replace({-10: 0, -3: 3.48432, 1: 3.48432})
+
+# 20 change Average monthly red wine intake
+df['4407-0.0'] = df[field].replace({-10: 0, -3: 2, 1: 2})
+
+# 21.Arrange the value 131306-0.0 as our target value as a binary value (0,1)
 # Define the special dates
 special_dates = ['1900-01-01', '1909-09-09', '2037-07-07']
 # Define a function that checks if a date is in the special group
@@ -104,7 +125,6 @@ one_hot_encoded = pd.get_dummies(df, columns=[
     '1558-0.0',
     '1707-0.0',
     '924-0.0',
-    '6164-0.0',
     '1329-0.0',
     '1369-0.0',
     '1548-0.0',
@@ -114,7 +134,6 @@ one_hot_encoded = pd.get_dummies(df, columns=[
     'Alcohol',
     'Handedness',
     'Usual Walking Pace',
-    'Types of physical activity in last 4 weeks',
     'Oily fish intake',
     'Beef intake',
     'Variation in diet'
@@ -125,7 +144,6 @@ cols_to_convert = ['Ethnicity_1','Ethnicity_2','Ethnicity_3','Ethnicity_4','Ethn
 'Alcohol_1.0','Alcohol_2.0','Alcohol_3.0','Alcohol_4.0','Alcohol_5.0','Alcohol_6.0',
 'Handedness_1.0','Handedness_2.0','Handedness_3.0',
 'Usual Walking Pace_1.0','Usual Walking Pace_2.0','Usual Walking Pace_3.0',
-'Types of physical activity in last 4 weeks_0','Types of physical activity in last 4 weeks_1',
 'Oily fish intake_0.0','Oily fish intake_1.0','Oily fish intake_2.0','Oily fish intake_3.0','Oily fish intake_4.0','Oily fish intake_5.0',
 'Beef intake_0.0','Beef intake_1.0','Beef intake_2.0','Beef intake_3.0','Beef intake_4.0','Beef intake_5.0',
 'Variation in diet_1.0','Variation in diet_2.0','Variation in diet_3.0']
