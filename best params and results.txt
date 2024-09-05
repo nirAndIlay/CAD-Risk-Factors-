@@ -1,4 +1,0 @@
-Best Model Parameters: ('l1', 1, 500)
-Best Model Threshold: 0.053585833079805516
-Best Model F1 Score: 0.3334773840391818
-Best Model Recall Score: 0.8312387791741472

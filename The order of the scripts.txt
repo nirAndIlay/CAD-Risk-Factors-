@@ -1,3 +1,0 @@
-The order of the scripts:
-1. Creating the data frame.
-2. Dealing with Nulls.
