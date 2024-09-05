@@ -33,3 +33,12 @@ The project analyzes a range of biometric and genetic factors to assess their in
 
 - **Accuracy**: 0.83 (83%)
 - **Recall**: 0.83 (83%)
+
+- ## 📊 Results
+
+- **Accuracy**: 0.83 (83%)
+- **Recall**: 0.83 (83%)
+
+### Top 10 Most Influential Features in the Model
+
+![Top 10 Features](images/Top_10_Features.png)
