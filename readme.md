@@ -41,4 +41,4 @@ The project analyzes a range of biometric and genetic factors to assess their in
 
 ### Top 10 Most Influential Features in the Model
 
-![Top 10 Features](images/Top_10_Features.png)
+![Top 10 Features](Top_10_Features.png)
