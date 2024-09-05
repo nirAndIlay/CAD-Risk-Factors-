@@ -28,3 +28,8 @@ The project analyzes a range of biometric and genetic factors to assess their in
 - **Programming Languages**: Python, SQL
 - **Libraries**: Scikit-learn, Pandas, NumPy, Matplotlib
 - **Tools**: Jupyter Notebooks, GitHub
+
+## 📊 Results
+
+- **Accuracy**: 0.83 (83%)
+- **Recall**: 0.83 (83%)
